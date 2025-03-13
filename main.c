@@ -42,7 +42,7 @@ int main() {
                 displayMainMenu();
                 break;
             case 4:
-                printf("\nThank you for using XYZ Bank. Goodbye!\n");
+                printf("\nThank you for using Bank of Baroda. Goodbye!\n");
                 exit(0); // Exit the program
             default:
                 printf("\nInvalid choice! Please try again.\n");
@@ -53,9 +53,9 @@ int main() {
 }
 
 void displayWelcomePage() {
-    printf("===============================\n");
-    printf("       WELCOME TO XYZ BANK     \n");
-    printf("===============================\n");
+    printf("=====================================================\n");
+    printf("              WELCOME TO Bank of Baroda              \n");
+    printf("=====================================================\n");
     printf("Please choose an option:\n");
     printf("1. View Bank IFSC Code\n");
     printf("2. View Bank Instructions & Policy\n");
@@ -64,26 +64,26 @@ void displayWelcomePage() {
 }
 
 void displayBankIFSC() {
-    printf("\nXYZ Bank IFSC Code: XYZB0001234\n");
-    printf("Thank you for using our services!\n");
+    printf("\nBank of Baroda Bank IFSC Code: BARB0SIDHIX\n");
+    printf("Thank you for using our services!\n\n");
 }
 
 void displayBankInstructions() {
-    printf("\nXYZ Bank Instructions & Policy:\n");
+    printf("\nBank of Baroda Bank Instructions & Policy:\n");
     printf("1. Maintain a minimum balance of INR 1000.\n");
     printf("2. Provide valid KYC documents for account creation.\n");
-    printf("3. Contact customer care for any issues: 1800-XYZ-BANK.\n");
+    printf("3. Contact customer care for any issues: 1800-2484-5614.\n");
     printf("4. Follow RBI guidelines for secure transactions.\n");
-    printf("Thank you for your cooperation!\n");
+    printf("Thank you for your cooperation!\n\n");
 }
 
 void displayMainMenu() {
     int menuChoice;
 
     do {
-        printf("\n================================\n");
-        printf("         MAIN MENU               \n");
-        printf("================================\n");
+        printf("\n=======================================================\n");
+        printf("                         MAIN MENU                     \n");
+        printf("=======================================================\n");
         printf("1. Create Account\n");
         printf("2. Login\n");
         printf("3. Exit\n");
@@ -98,7 +98,7 @@ void displayMainMenu() {
                 loginAccount();
                 break;
             case 3:
-                printf("\nThank you for using XYZ Bank. Have a great day!\n");
+                printf("\nThank you for using Bank of Baroda. Have a great day!\n");
                 exit(0);
             default:
                 printf("\nInvalid choice! Please try again.\n");
@@ -136,13 +136,13 @@ void createAccount() {
     printf("Enter Initial Deposit Amount: ");
     scanf("%f", &initialBalance);
 
-    FILE *file = fopen("accdetails.txt", "a");
+    FILE *file = fopen("./Account Details/accdetails.txt", "a");
     if (file == NULL) {
         printf("Error opening file!\n");
         return;
     }
 
-    fprintf(file, "===================================\n");
+    fprintf(file, "============================================\n");
     fprintf(file, "Account Details:\n");
     fprintf(file, "Account Number: %s\n", accountNumber);
     fprintf(file, "Account PIN: %s\n", accountPin);
@@ -154,12 +154,12 @@ void createAccount() {
     fprintf(file, "Mobile Number: %s\n", mobile);
     fprintf(file, "Aadhar Number: %s\n", aadhar);
     fprintf(file, "Initial Balance: %.2f\n", initialBalance);
-    fprintf(file, "===================================\n\n");
+    fprintf(file, "=============================================\n\n");
 
     fclose(file);
 
 
-    printf("Account created successfully with an initial deposit of %.2f and details saved to accdetails.txt!\n", initialBalance);
+    printf("\nAccount created successfully with an initial deposit of Rs. %.2f \n", initialBalance);
 }
 void loginAccount() {
     char enteredAccount[13], enteredPin[7], accountNumber[13], accountPin[7];
@@ -168,13 +168,13 @@ void loginAccount() {
     float balance = 0.0;
     char transactionFile[100];
 
-    printf("\n=== Login to Account ===\n");
+    printf("\n========== Login to Account ===========\n");
     printf("Enter Account Number: ");
     scanf("%s", enteredAccount);
     printf("Enter Account PIN: ");
     scanf("%s", enteredPin);
 
-    FILE *file = fopen("accdetails.txt", "r");
+    FILE *file = fopen("./Account Details/accdetails.txt", "r");
     if (file == NULL) {
         printf("Error opening file!\n");
         return;
@@ -202,9 +202,9 @@ void loginAccount() {
                 // Display post-login menu
                 int loginChoice;
                 do {
-                    printf("\n================================\n");
-                    printf("       ACCOUNT MENU             \n");
-                    printf("================================\n");
+                    printf("\n==================================================\n");
+                    printf("                     ACCOUNT MENU                   \n");
+                    printf("====================================================\n");
                     printf("1. Balance Check\n");
                     printf("2. Perform Transaction\n");
                     printf("3. Account Holder Details\n");
@@ -254,9 +254,9 @@ void performTransaction(float *balance, const char *transactionFile) {
     int transactionChoice;
 
     do {
-        printf("\n================================\n");
-        printf("      TRANSACTION MENU           \n");
-        printf("================================\n");
+        printf("\n=====================================================\n");
+        printf("                     TRANSACTION MENU                  \n");
+        printf("=======================================================\n");
         printf("1. Deposit\n");
         printf("2. Withdraw\n");
         printf("3. Transfer\n");
@@ -355,7 +355,7 @@ void performTransfer(float *balance, const char *transactionFile, const char *se
     printf("Enter Recipient's Last Name: ");
     scanf("%s", recipientLastName);
 
-    FILE *file = fopen("accdetails.txt", "r");
+    FILE *file = fopen("./Account Details/accdetails.txt", "r");
     if (file == NULL) {
         printf("Error opening account details file!\n");
         return;
@@ -449,13 +449,13 @@ void performTransfer(float *balance, const char *transactionFile, const char *se
 
 void displayAccountDetails(char *accountNumber) {
     char buffer[256], fileAccountNumber[13];
-    FILE *file = fopen("accdetails.txt", "r");
+    FILE *file = fopen("./Account Details/accdetails.txt", "r");
     if (file == NULL) {
         printf("Error opening account details file!\n");
         return;
     }
 
-    printf("\n=== Account Holder Details ===\n");
+    printf("\n======== Account Holder Details ========\n");
     while (fgets(buffer, sizeof(buffer), file) != NULL) {
         if (sscanf(buffer, "Account Number: %s", fileAccountNumber) == 1) {
             if (strcmp(fileAccountNumber, accountNumber) == 0) {
@@ -478,9 +478,9 @@ void passbook(const char *transactionFile) {
     char buffer[256];
 
     do {
-        printf("\n================================\n");
-        printf("         PASSBOOK MENU           \n");
-        printf("================================\n");
+        printf("\n===============================================\n");
+        printf("                   PASSBOOK MENU                 \n");
+        printf("=================================================\n");
         printf("1. All Transactions\n");
         printf("2. Back to Account Menu\n");
         printf("\nEnter your choice: ");
@@ -508,7 +508,7 @@ void printAllTransactions(const char *transactionFile) {
         return;
     }
 
-    printf("\n=== All Transactions ===\n");
+    printf("\n========= All Transactions ========\n");
 
     // Read all the lines from the transaction file
     while (fgets(buffer, sizeof(buffer), file) != NULL) {
